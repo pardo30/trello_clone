@@ -1,0 +1,11 @@
+.buttonForm {
+    width: 83px;
+    height: 32px;
+    margin: 2px;
+
+    color: white;
+    border: none;
+    border-radius: 3px;
+    background-color: teal;
+
+}

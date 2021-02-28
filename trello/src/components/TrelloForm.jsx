@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './TrelloForm.css';
 
 
 
@@ -12,7 +13,7 @@ const TrelloForm = (props) => {
 
     const buttonForm = () => {
         return(
-            <button onClick={openForm} >
+            <button onClick={openForm} className="buttonForm" >
                 {buttonText}
             </button> 
         )
