@@ -5,7 +5,7 @@ const TrelloCard = () => {
     return (
         <div className='card'>
             <div className='cardText'>Texto</div>
-            <button className='cardButton'>Delete</button>
+            <button className='cardButton'>X</button>
         </div>
     )
 }

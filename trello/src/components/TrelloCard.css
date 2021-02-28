@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
 
-    width: 300px;
+    width: 240px;
 }
 
 .cardText {
@@ -13,5 +13,11 @@
 }
 
 .cardButton {
+    width: 28px;
+    height: 28px;
+
+    color: rgb(50, 50, 50);
+    background-color: rgba(255, 225, 255, 0);
+    border: none;
 
 }

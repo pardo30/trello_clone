@@ -1,7 +1,7 @@
 import React from 'react'
 import TrelloCard from './TrelloCard'
-import TrelloForm from './TrelloForm';
 import './TrelloColunm.css';
+import TrelloForm from './TrelloForm';
 
 const TrelloColunm = () => {
     return (
@@ -10,7 +10,7 @@ const TrelloColunm = () => {
            <TrelloCard />
            <TrelloCard />
            <TrelloCard />
-           <TrelloForm />
+           <TrelloForm type='task' />
         </div>
     )
 }
