@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
+import './TrelloCard.css';
 
 const TrelloCard = () => {
     return (
-        <div>
-            Card
+        <div className='card'>
+            <div className='cardText'>Texto</div>
+            <button className='cardButton'>Delete</button>
         </div>
     )
 }

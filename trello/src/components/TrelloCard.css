@@ -1,0 +1,17 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 300px;
+}
+
+.cardText {
+    width: 200px;
+
+    color: white;
+}
+
+.cardButton {
+
+}
