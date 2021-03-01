@@ -8,8 +8,8 @@ const App = () => {
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
       <div className='AppContent'>
-      <TrelloColunm />
-      <TrelloColunm />
+      <TrelloColunm colunmtitle="title 1"/>
+      <TrelloColunm colunmtitle="title 2"/>
       <TrelloForm type='list'/>
       </div>
     </div>
