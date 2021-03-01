@@ -3,12 +3,13 @@
     flex-direction: row;
     justify-content: space-between;
 
-    width: 240px;
+    width: 272px;
 }
 
 .cardText {
-    width: 200px;
+    width: 240px;
 
+    font-size: 14px;
     color: white;
 }
 

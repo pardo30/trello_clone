@@ -1,7 +1,8 @@
+.AppTitle{
+  text-align: center;
+}
+
 .AppContent {
   display: flex;
   flex-direction: row;
-
-  
-
 }

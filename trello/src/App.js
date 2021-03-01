@@ -6,7 +6,7 @@ import './App.css'
 const App = () => {
   return (
     <div className='App'>
-      <h1>Initial State</h1>
+      <h1 className='AppTitle'>Trello Clone</h1>
       <div className='AppContent'>
       <TrelloColunm />
       <TrelloColunm />
