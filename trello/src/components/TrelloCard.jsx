@@ -1,10 +1,10 @@
 import React from 'react';
 import './TrelloCard.css';
 
-const TrelloCard = () => {
+const TrelloCard = (props) => {
     return (
         <div className='card'>
-            <div className='cardText'>Texto</div>
+            <div className='cardText'>{props.text}</div>
             <button className='cardButton'>X</button>
         </div>
     )
