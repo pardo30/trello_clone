@@ -6,7 +6,7 @@ import TrelloForm from './TrelloForm';
 const TrelloColunm = (props) => {
     return (
         <div className='list'>
-           <h3 className='listTitle'>{props.colunmtitle}</h3>
+           <h3 className='listTitle'>{props.title}</h3>
            <TrelloCard />
            <TrelloCard />
            <TrelloCard />
