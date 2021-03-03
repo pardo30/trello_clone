@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Column 1",
+    "id": 0,
+    "cards": [
+      {
+        "id": 0,
+        "text": "card 1"
+      },
+      {
+        "id": 1,
+        "text": "card 2"
+      }
+    ]
+  },
+  {
+    "title": "Column 2",
+    "id": 1,
+    "cards": [
+      {
+        "id": 2,
+        "text": "card 3"
+      },
+      {
+        "id": 3,
+        "text": "card 4"
+      }
+    ]
+  }
+]
+
+

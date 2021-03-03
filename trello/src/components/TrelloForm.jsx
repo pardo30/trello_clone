@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './TrelloForm.css';
+import base from '../data.json';
 
 
 
 const TrelloForm = (props) => {
     const [openState, setOpenState] = useState(false);
-    const [text, setText] = useState('');
+    const [textForm, setTextForm] = useState('');
     
     const buttonText = (props.type === 'list') ? 'New List' : 'New Task' 
 
@@ -19,6 +20,26 @@ const TrelloForm = (props) => {
             </button> 
         )
     }
+    let columnId = props.columnId
+    const addFunction = (textForm, columnId) => {
+        console.log(columnId)
+        // if (props.type === 'list') {
+        //     base.push({
+        //         "title": {textForm},
+        //         "id": Date(),
+        //         "cards":{}
+        //     })
+        //     console.log(columnId)
+        // }
+        // if (props.type === 'list') {
+        //     base["id"][columnId].push({
+        //         "cards":{
+        //             "text":{textForm},
+        //             "id": Date()
+        //         }
+        //     })
+        // }
+    } 
 
     const placeholder = (props.type === 'list') ? 'Add a new List' : 'Add a new Task' 
 
@@ -31,10 +52,10 @@ const TrelloForm = (props) => {
                     autoFocus
                     placeholder={placeholder}
                     onBlur={closeForm}
-                    onChange={e => setText(e.target.value)}
-                    value={text}
+                    onChange={e => setTextForm(e.target.value)}
+                    value={textForm}
                     />
-                {/* <button>Add</button> */}
+                {/* <button onClick={() => console.log(props.columnId)}>Add</button> */}
                 <button 
                     className="closeButton"
                     onClick={closeForm}

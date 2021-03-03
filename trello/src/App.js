@@ -2,40 +2,12 @@ import React, {useState} from 'react';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import './App.css';
+import base from './data.json';
 
 const App = () => {
-  const initialState = [
-    {
-      title: 'Column 1',
-      id: 0,
-      cards: [
-        {
-          id: 0,
-          text: "card 1"
-        },
-        {
-          id: 1,
-          text: "card 2"
-        }
-      ]
-    },
-    {
-      title: 'Column 2',
-      id: 1,
-      cards: [
-        {
-          id: 2,
-          text: "card 3"
-        },
-        {
-          id: 3,
-          text: "card 4"
-        }
-      ]
-    }
-  ];
+  
 
-  const [data, setData] = useState(initialState);
+  const [data, setData] = useState(base);
 
   return (
     <div className='App'>
