@@ -20,26 +20,16 @@ const TrelloForm = (props) => {
             </button> 
         )
     }
-    let columnId = props.columnId
-    const addFunction = (textForm, columnId) => {
-        console.log(columnId)
-        // if (props.type === 'list') {
-        //     base.push({
-        //         "title": {textForm},
-        //         "id": Date(),
-        //         "cards":{}
-        //     })
-        //     console.log(columnId)
-        // }
-        // if (props.type === 'list') {
-        //     base["id"][columnId].push({
-        //         "cards":{
-        //             "text":{textForm},
-        //             "id": Date()
-        //         }
-        //     })
-        // }
-    } 
+    
+    const handleAddColumn = () => {
+        const title = textForm
+        props.addColumn (title)
+
+        }
+    const handleAddCard = () => {
+
+    }
+    
 
     const placeholder = (props.type === 'list') ? 'Add a new List' : 'Add a new Task' 
 
@@ -52,10 +42,14 @@ const TrelloForm = (props) => {
                     autoFocus
                     placeholder={placeholder}
                     onBlur={closeForm}
-                    onChange={e => setTextForm(e.target.value)}
+                    onChange={e => {
+                            const base = e.target;
+                            e.preventDefault();
+                            setTextForm(base.value); 
+                            }}
                     value={textForm}
                     />
-                {/* <button onClick={() => console.log(props.columnId)}>Add</button> */}
+                <button onMouseDown={(props.type === 'list') ? handleAddColumn : handleAddCard }>Add</button>
                 <button 
                     className="closeButton"
                     onClick={closeForm}
