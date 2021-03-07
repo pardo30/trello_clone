@@ -1,7 +1,7 @@
 .formbutton {
     width: 83px;
     height: 32px;
-    margin: 2px;
+    margin: 5px;
 
     color: white;
     border: none;
@@ -16,6 +16,7 @@
     align-items: flex-start;
 
     width: 272px;
+    margin-top: 5px;
 }
 .formInput {
     width: 240px;

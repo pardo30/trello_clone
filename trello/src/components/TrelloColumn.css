@@ -10,6 +10,13 @@
     background-color: cadetblue;
 }
 
+.listHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .listTitle {
     width: 100%;
     height: 40px;
@@ -20,4 +27,18 @@
     color: white;
     background-color: none;
 
+}
+
+.deleteButton {
+    display: none;
+    width: 28px;
+    height: 28px;
+
+    color: rgb(50, 50, 50);
+    background-color: rgba(255, 225, 255, 0);
+    border: none;
+}
+
+.listHeader:hover .deleteButton{
+    display: block;
 }

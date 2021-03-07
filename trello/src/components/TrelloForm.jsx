@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TrelloForm.css';
-import base from '../data.json';
 
 
 
@@ -27,12 +26,12 @@ const TrelloForm = (props) => {
         setTextForm(base.value)
         }
 
-    const handleAddColumn = e => {
+    const handleAddColumn = () => {
         const title = textForm
         props.addColumn (title)
         }
 
-    const handleAddCard =  e => {
+    const handleAddCard =  () => {
         const columnId = props.columnId
         const text = textForm
         props.addCard (columnId,text)
