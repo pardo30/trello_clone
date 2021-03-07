@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: baselinegit a;
+    align-items: flex-start;
 
     width: 272px;
 }
@@ -28,6 +28,16 @@
     background-color: rgb(168, 187, 187)
 }
 
+.addButton {
+    width: 28px;
+    height: 40px;
+
+    color: rgb(50, 50, 50);
+    font-size: 20px;
+    background-color: rgba(255, 225, 255, 0);
+    border: none;
+}
+
 .closeButton {
     width: 28px;
     height: 40px;
@@ -35,4 +45,9 @@
     color: rgb(50, 50, 50);
     background-color: rgba(255, 225, 255, 0);
     border: none;
+}
+
+.addButton:hover, .closeButton:hover {
+    background-color: rgba(47, 79, 79, 0.178);
+    border-radius: 3px;
 }

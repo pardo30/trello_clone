@@ -28,20 +28,33 @@ const App = () => {
   const [data, setData] = useState(initialState);
 
   let columnId = 2
+  let cardId = 4
 
   const addColumn = (title) => {
     if (!title) return;
 
     const newColumn = {
-      id: ++columnId,
-      title,
-      cards: [],
+      "id": ++columnId,
+      "title": title,
+      "cards": [],
     };
 
     setData([...data, newColumn]);
   };
 
-  const addCard =() => {}
+  const addCard =({columnInId, text}) => {
+    if (!text) return;
+
+    const newCard = {
+        "cardId": ++cardId,
+        "text": text
+      };
+  
+    setData(data.columnId.map(column => column.id === columnInId 
+          ? column.cards.push (newCard)
+          : column ))
+       
+    }
 
  
   return (

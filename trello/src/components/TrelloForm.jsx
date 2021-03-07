@@ -30,11 +30,13 @@ const TrelloForm = (props) => {
     const handleAddColumn = e => {
         const title = textForm
         props.addColumn (title)
-
         }
-    const handleAddCard = () => {
 
-    }
+    const handleAddCard =  e => {
+        const columnId = props.columnId
+        const text = textForm
+        props.addCard (columnId,text)
+        }
     
 
     const placeholder = (props.type === 'list') ? 'Add a new List' : 'Add a new Task' 
@@ -51,7 +53,12 @@ const TrelloForm = (props) => {
                     onChange={handleChangeInput}
                     value={textForm}
                     />
-                <button onMouseDown={(props.type === 'list') ? handleAddColumn : handleAddCard }>Add</button>
+                <button 
+                    onMouseDown={(props.type === 'list') ? handleAddColumn : handleAddCard }
+                    className="addButton"
+                    >
+                        +
+                    </button>
                 <button 
                     className="closeButton"
                     onClick={closeForm}
