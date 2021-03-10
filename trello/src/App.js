@@ -26,39 +26,51 @@ const App = () => {
       ]
 
   const [data, setData] = useState(initialState);
+  const [refId, setRefId] = useState(2);
+  const [refCardId, setRefCardId] = useState(4);
 
-  let refId = 2
-  let refCardId = 4
 
   const addColumn = (title) => {
+    
     if (!title) return;
+    
 
     const newColumn = {
-      id: ++refId,
       title: title,
+      id: refId + 1,
       cards: [],
     };
 
-    setData([...data, newColumn]);
+      setData([...data, newColumn]);
+      setRefId(refId + 1)
   }
 
   const addCard = ({ columnId, text }) => {
     
     const newCard = {
-        id: ++refCardId,
+        id: refCardId + 1,
         text: text
       };
 
-    setData(data.map(column => 
-        column.id === columnId
-          ? column.cards.push(newCard)
-          : column
-      ))
+    data.map(column => column.id == columnId)
+      setData(
+      if (data.id === columnId)
+        data.cards.push(newCard)
+      // data.map(column => 
+      //   column.id === columnId
+      //     ? column.cards.push(newCard)
+      //     : column
+      // ))
+    
+    setRefCardId(refCardId + 1)
   }
 
-  const deleteColumn = (columnId)=> {
-    const newData = data.filter(column => column.id !== columnId);
-    setData(newData)
+  const deleteColumn = ()=> {
+    const index = data.id
+    const newData = data.splice(index,1)
+    console.log(newData)
+    //setData(newData)
+
   }
 
  

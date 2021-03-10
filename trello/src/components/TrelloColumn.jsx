@@ -4,10 +4,11 @@ import './TrelloColumn.css';
 import TrelloForm from './TrelloForm';
 
 const TrelloColunm = (props) => {
-
-    const handleDeleteColumn = () => {
+    
     const columnId = props.id
-    props.deleteColumn(columnId)
+
+    const handleDeleteColumn = (columnid) => {
+        props.deleteColumn(columnId)
     }
 
     return (
@@ -16,7 +17,7 @@ const TrelloColunm = (props) => {
                 <h3 className='listTitle'>{props.title}</h3>
                 <button 
                     className='deleteButton'
-                    //onClick={handleDeleteColumn()}
+                    onMouseDown={handleDeleteColumn()}
                 > X </button> 
            </div>     
            {props.cards.map(card => <TrelloCard text={card.text} key={card.id} id={card.id}/>)}
