@@ -37,7 +37,7 @@ const App = () => {
 
     const newColumn = {
       title: title,
-      id: refId + 1,
+      id: refId,
       cards: [],
     };
 
@@ -45,41 +45,43 @@ const App = () => {
       setRefId(refId + 1)
   }
 
-  const addCard = ({ columnId, text }) => {
+  const addCard = (id, text) => {
     
     const newCard = {
-        id: refCardId + 1,
+        id: refCardId,
         text: text
       };
-
-    data.map(column => column.id == columnId)
-      setData(
-      if (data.id === columnId)
-        data.cards.push(newCard)
-      // data.map(column => 
-      //   column.id === columnId
-      //     ? column.cards.push(newCard)
-      //     : column
-      // ))
-    
+    const newData = data.map(column => column.id = id
+        ? {...column, cards: column.cards.push(newCard)}
+        : column)
+    console.log(newData)
+    //setData(newData)
     setRefCardId(refCardId + 1)
   }
 
-  const deleteColumn = ()=> {
-    const index = data.id
-    const newData = data.splice(index,1)
-    console.log(newData)
-    //setData(newData)
-
-  }
+  // const deleteColumn = id => {
+  //   const newData = data.filter(column => column.id !== id)
+  //   console.log(newData)
+  //   //setData(newData)
+  //  }
 
  
   return (
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
       <div className='AppContent'>
-      {data.map(column => <TrelloColumn title={column.title} cards={column.cards} key={column.id} id={column.id} addCard={addCard} deleteColumn={deleteColumn}/>)}
-      <TrelloForm type='list' addColumn={addColumn} />
+      {data.map(column => 
+        <TrelloColumn 
+          title={column.title} 
+          cards={column.cards} 
+          key={column.id} 
+          id={column.id} 
+          addCard={addCard} 
+          //deleteColumn={deleteColumn}
+        />)}
+      <TrelloForm 
+        type='column' 
+        addColumn={addColumn} />
       </div>
     </div>
   )

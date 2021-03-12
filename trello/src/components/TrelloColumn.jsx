@@ -7,9 +7,9 @@ const TrelloColunm = (props) => {
     
     const columnId = props.id
 
-    const handleDeleteColumn = (columnid) => {
-        props.deleteColumn(columnId)
-    }
+    // const handleDeleteColumn = () => {
+    //     props.deleteColumn(columnId)
+    // }
 
     return (
         <div className='list' id={props.id}>
@@ -17,11 +17,18 @@ const TrelloColunm = (props) => {
                 <h3 className='listTitle'>{props.title}</h3>
                 <button 
                     className='deleteButton'
-                    onMouseDown={handleDeleteColumn()}
+                    //onMouseDown={handleDeleteColumn()}
                 > X </button> 
            </div>     
-           {props.cards.map(card => <TrelloCard text={card.text} key={card.id} id={card.id}/>)}
-           <TrelloForm type='task' columnId={props.id} addCard={props.addCard}/>
+           {props.cards.map(card => 
+                <TrelloCard 
+                    text={card.text} 
+                    key={card.id} 
+                    id={card.id}/>)}
+            <TrelloForm 
+                type='task' 
+                id={props.id} 
+                addCard={props.addCard}/>
         </div>
     )
 }
