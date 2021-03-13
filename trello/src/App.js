@@ -24,8 +24,8 @@ const App = () => {
             "text": "card3"}
         ]},
       ]
-  const [refId, setRefId] = useState(2);
-  const [refCardId, setRefCardId] = useState(4);
+  const [refId, setRefId] = useState(1);
+  const [refCardId, setRefCardId] = useState(3);
   
   const reducer = (data, action) => {
     switch (action.type) {
@@ -51,10 +51,18 @@ const App = () => {
         )
         return newData;
       
-      case 'DELETE_LIST':
-        const newData = data.filter (column => column.id === action.payload.columnId)
-        return newData;
+      case 'DELETE_COLUMN':
+        const newDeleteDataColumn = data.filter (column => column.id !== action.payload.columnId)
+        return newDeleteDataColumn;
       
+      case 'DELETE_CARD':
+        const newDeleteDataCard = data.map (column =>
+          column.id === action.payload.columnId
+            ? {...column, cards: column.cards.filter (card => card.id !== action.payload.cardId)}
+            : column
+        )
+        return newDeleteDataCard;
+
       default:
         return data;
     }
@@ -76,10 +84,17 @@ const App = () => {
       payload: {text, columnId}
     })
   
-  const deteleList = listId => 
+  const deleteColumn = (columnId) => 
     dispatch({
-      type: 'DELETE_COLUMN'
-    })  
+      type: 'DELETE_COLUMN',
+      payload: columnId
+    }) 
+  
+  const deleteCard = (cardId, columnId) => 
+    dispatch({
+      type: 'DELETE_CARD',
+      payload: {cardId, columnId}
+    }) 
  
   return (
     <div className='App'>
@@ -92,7 +107,8 @@ const App = () => {
           key={column.id} 
           id={column.id} 
           addCard={addCard} 
-          //deleteColumn={deleteColumn}
+          deleteColumn={deleteColumn}
+          deleteCard={deleteCard}
         />)}
       <TrelloForm 
         type='column' 
