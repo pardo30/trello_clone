@@ -33,9 +33,8 @@ const TrelloForm = (props) => {
 
     const handleAddCard =  () => {
         const columnId = props.id
-        console.log(columnId)
         const text = textForm
-        props.addCard (columnId,text)
+        props.addCard (text,columnId)
         }
     
 

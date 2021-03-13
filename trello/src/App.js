@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useReducer } from 'react';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import './App.css';
@@ -24,48 +24,62 @@ const App = () => {
             "text": "card3"}
         ]},
       ]
-
-  const [data, setData] = useState(initialState);
   const [refId, setRefId] = useState(2);
   const [refCardId, setRefCardId] = useState(4);
-
-
-  const addColumn = (title) => {
-    
-    const newColumn = {
-      title: title,
-      id: refId,
-      cards: [],
-    };
-
-    setData([...data, newColumn]);
-    setRefId(refId + 1)
-  }
-
-  const addCard = (id, text) => {
-    
-    const newCard = {
-        id: refCardId,
-        text: text
-      };
-    
-
-    setData(prevData => {
-      ...prevData,
-      cards: {
-        prevData.cards,
-        newCard
-      }
+  
+  const reducer = (data, action) => {
+    switch (action.type) {
+      case 'ADD_COLUMN':
+        const newColumn = {
+          title: action.payload,
+          id: refId,
+          cards: [],
+        };
+        setRefId(refId + 1)
+        return [...data, newColumn];
+      
+      case 'ADD_CARD':
+        const newCard = {
+          id: refCardId,
+          text: action.payload.text
+          };
+        setRefCardId(refCardId + 1)
+        const newData = data.map (column =>
+          column.id === action.payload.columnId
+            ? {...column, cards: [...column.cards, newCard]}
+            : column
+        )
+        return newData;
+      
+      case 'DELETE_LIST':
+        const newData = data.filter (column => column.id === action.payload.columnId)
+        return newData;
+      
+      default:
+        return data;
     }
-    setRefCardId(refCardId + 1)
   }
 
-  // const deleteColumn = id => {
-  //   const newData = data.filter(column => column.id !== id)
-  //   console.log(newData)
-  //   //setData(newData)
-  //  }
+  const [data, dispatch] = useReducer(reducer, initialState)
 
+
+
+  const addColumn = (title) => 
+    dispatch({
+      type: 'ADD_COLUMN', 
+      payload: title
+    });
+    
+  const addCard = (text, columnId) => 
+    dispatch({
+      type: 'ADD_CARD',
+      payload: {text, columnId}
+    })
+  
+  const deteleList = listId => 
+    dispatch({
+      type: 'DELETE_COLUMN'
+    })  
  
   return (
     <div className='App'>
