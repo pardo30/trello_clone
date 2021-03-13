@@ -32,17 +32,14 @@ const App = () => {
 
   const addColumn = (title) => {
     
-    if (!title) return;
-    
-
     const newColumn = {
       title: title,
       id: refId,
       cards: [],
     };
 
-      setData([...data, newColumn]);
-      setRefId(refId + 1)
+    setData([...data, newColumn]);
+    setRefId(refId + 1)
   }
 
   const addCard = (id, text) => {
@@ -51,11 +48,15 @@ const App = () => {
         id: refCardId,
         text: text
       };
-    const newData = data.map(column => column.id = id
-        ? {...column, cards: column.cards.push(newCard)}
-        : column)
-    console.log(newData)
-    //setData(newData)
+    
+
+    setData(prevData => {
+      ...prevData,
+      cards: {
+        prevData.cards,
+        newCard
+      }
+    }
     setRefCardId(refCardId + 1)
   }
 
