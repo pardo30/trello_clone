@@ -30,7 +30,7 @@
 }
 
 .deleteButton {
-    /* display: none; */
+    display: none;
     width: 28px;
     height: 28px;
 
@@ -38,7 +38,7 @@
     background-color: rgba(255, 225, 255, 0);
     border: none;
 }
-/*
+
 .listHeader:hover .deleteButton{
     display: block;
-}*/
+}
