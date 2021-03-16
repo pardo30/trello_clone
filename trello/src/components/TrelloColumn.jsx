@@ -1,4 +1,5 @@
 import React from 'react'
+import { Droppable } from 'react-beautiful-dnd';
 import TrelloCard from './TrelloCard'
 import './TrelloColumn.css';
 import TrelloForm from './TrelloForm';
@@ -19,14 +20,24 @@ const TrelloColunm = (props) => {
                     className='deleteButton'
                     onMouseDown={handleDeleteColumn}
                 > X </button> 
-           </div>     
-           {props.cards.map(card => 
-                <TrelloCard 
-                    text={card.text} 
-                    key={card.id} 
-                    id={card.id}
-                    columnId={props.id}
-                    deleteCard={props.deleteCard}/>)}
+           </div>
+           <Droppable droppableId={String(props.id)}>
+               {provided => (     
+                <div 
+                    ref={provided.innerRef} 
+                    {...provided.droppableProps}>
+                {props.cards.map((card, index) => 
+                    <TrelloCard 
+                        text={card.text} 
+                        key={card.id} 
+                        id={card.id}
+                        index={index}
+                        columnId={props.id}
+                        deleteCard={props.deleteCard}/>)}
+                    {provided.placeholder}
+                </div>
+                )}
+            </ Droppable>
             <TrelloForm 
                 type='task' 
                 id={props.id} 

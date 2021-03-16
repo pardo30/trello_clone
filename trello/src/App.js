@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import './App.css';
@@ -96,9 +97,20 @@ const App = () => {
       payload: {cardId, columnId}
     }) 
  
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+    // There is not destination
+    if(!destination) {  
+      return;
+    }
+    // Destination in the same column
+  }  
+    
+ 
   return (
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
+      <DragDropContext onDragEnd={onDragEnd}>
       <div className='AppContent'>
       {data.map(column => 
         <TrelloColumn 
@@ -114,6 +126,7 @@ const App = () => {
         type='column' 
         addColumn={addColumn} />
       </div>
+      </ DragDropContext>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 import './TrelloCard.css';
 
 const TrelloCard = (props) => {
@@ -10,12 +11,19 @@ const TrelloCard = (props) => {
     }
 
     return (
-        <div className='card' id={props.id}>
-            <div className='cardText'>{props.text}</div>
-            <button 
-                className='cardButton'
-                onClick={handleDeleteCard}>X</button>
-        </div>
+        <Draggable draggableId={String(props.id)} index={props.index}>
+        {provided => (
+            <div 
+                ref={provided.innerRef} 
+                    {...provided.dragHandleProps} 
+                    {...provided.draggableProps}>
+                <div className='card' id={props.id}>
+                    <div className='cardText'>{props.text}</div>
+                    <button className='cardButton' onClick={handleDeleteCard}>X</button>
+                </div>
+            </div>
+        )}
+        </Draggable>
     )
 }
 
