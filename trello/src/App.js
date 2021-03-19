@@ -66,39 +66,40 @@ const App = () => {
         console.log('delete')
         return newDeleteDataCard;
 
-      // case 'DRAG_HAPPEND':
-      //   const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type} = action.payload;
+      case 'DRAG_HAPPEND':
+        const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type} = action.payload;
         
-      //   //Dragging columns around
-      //   if (type === 'column') {
-      //     const newDataDrag = [...data];
-      //     const column = newDataDrag.splice(droppableIndexStart,1);
-      //     newDataDrag.splice(droppableIndexEnd, 0, ...column);
-      //     return newDataDrag;
-      //   }
+        //Dragging columns around
+        if (type === 'column') {
+          const newDataDrag = [...data];
+          const column = newDataDrag.splice(droppableIndexStart,1);
+          newDataDrag.splice(droppableIndexEnd, 0, ...column);
+          return newDataDrag;
+        }
 
-      //   //In the same column
-      //   if(droppableIdStart === droppableIdEnd) {
-      //     const column = data.find(column => String(column.id) === String(droppableIdStart));
-      //     const draggingCards = column.cards;
-      //     console.log(draggingCards);
-      //     const card = draggingCards.splice(String(droppableIndexStart),1);
-      //     console.log(card)
-      //     const newDataDrag = draggingCards.splice(String(droppableIndexEnd), 0, card);
-      //     console.log(newDataDrag)
-      //     return newDataDrag; 
-      //   }
+        //In the same column
+        if(droppableIdStart === droppableIdEnd) {
+          const column = data.find(column => String(column.id) === String(droppableIdStart));
+          console.log(column)
+          const draggingCards = column.cards;
+          console.log(draggingCards);
+          const card = draggingCards.splice(droppableIndexStart,1);
+          console.log(card)
+          const newDataDrag = draggingCards.splice(droppableIndexEnd, 0, card);
+          console.log(newDataDrag)
+          return newDataDrag; 
+        }
 
-      //   //Other column
-      //   if(droppableIdStart !== droppableIdEnd) {
-      //     const columnStart = data.find(column => String(column.id) === String(droppableIdStart));
-      //     console.log(draggableId);
-      //     const card = columnStart.cards.splice(droppableIndexStart,1);
-      //     const columnEnd = data.find(column => String(column.id) === String(droppableIdEnd));
-      //     const newDataDrag = columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
-      //     return newDataDrag;
-      //   }
-      //   break
+        //Other column
+        if(droppableIdStart !== droppableIdEnd) {
+          const columnStart = data.find(column => String(column.id) === String(droppableIdStart));
+          console.log(draggableId);
+          const card = columnStart.cards.splice(droppableIndexStart,1);
+          const columnEnd = data.find(column => String(column.id) === String(droppableIdEnd));
+          const newDataDrag = columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
+          return newDataDrag;
+        }
+        break
 
       default:
         return data;
@@ -145,8 +146,6 @@ const App = () => {
     if (!destination) {
       return;
     } else {
-     dispatch(
-       
        dragHappend(
          source.droppableId,
          destination.droppableId,
@@ -154,7 +153,7 @@ const App = () => {
          destination.index,
          draggableId,
          type
-       ))
+       )
     }
     // const sourceColumn = data.find(column => column.id === source.droppableId);
     // const destinationColumn = data.find(column => column.id === destination.droppableId);
