@@ -42,28 +42,29 @@ const TrelloForm = (props) => {
 
     const addForm = () => {
         return (
-            <div className="form">
+            <div className='form'>
                 <input 
-                    className="formInput"
-                    type="text"
+                    className='formInput'
+                    type='text'
                     autoFocus
                     placeholder={placeholder}
                     onBlur={closeForm}
                     onChange={handleChangeInput}
                     value={textForm}
                     />
-                <button 
+                <div
+                    type='button'
                     onMouseDown={(props.type === 'column') ? handleAddColumn : handleAddCard }
-                    className="addButton"
+                    className='addButton'
                     >
                         +
-                    </button>
-                <button 
-                    className="closeButton"
+                    </div>
+                <div 
+                    className='closeButton'
                     onClick={closeForm}
                     >
                         X
-                    </button>
+                    </div>
             </div>
         )
     }
