@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import './App.css';
@@ -64,6 +64,38 @@ const App = () => {
         )
         return newDeleteDataCard;
 
+      case 'DRAG_HAPPEND':
+        const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type} = action.payload;
+        const newDataDrag = [...data];
+        // There is not destination
+        //if(!destination) {  
+        //  return;
+        //}
+        // Dragging columns around
+        if (type === 'column') {
+          const column = newDataDrag.splice(droppableIndexStart,1);
+          newDataDrag.splice(droppableIndexEnd, 0, ...column);
+        }
+
+        //In the same column
+        if(droppableIdStart === droppableIdEnd) {
+          const column = data.find(column => droppableIdStart === column.id);
+          console.log(column);
+          const card = column.cards.splice(droppableIndexStart,1);
+          console.log(card);
+          column.cards.splice(droppableIndexEnd, 0, ...card) 
+        }
+
+        //Other column
+        if(droppableIdStart !== droppableIdEnd) {
+          const columnStart = data.find(column => droppableIdStart === column.id);
+          const card = columnStart.cards.splice(droppableIndexStart,1);
+          const columnEnd = data.find(column => droppableIdEnd === column.id);
+          columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
+        }
+
+        return newDataDrag;
+
       default:
         return data;
     }
@@ -96,38 +128,61 @@ const App = () => {
       type: 'DELETE_CARD',
       payload: {cardId, columnId}
     }) 
- 
+  
+  const dragHappend = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type) => 
+    dispatch({
+      type: 'DRAG_HAPPEND',
+      payload: { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type }
+    })  
+    
   const onDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-    // There is not destination
-    if(!destination) {  
+    const { destination, source, draggableId, type } = result;
+
+    if (!destination) {
       return;
     }
-    // Destination in the same column
-  }  
-    
- 
+
+    dispatch(
+      dragHappend(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index,
+        draggableId,
+        type
+      ))
+  }
+
   return (
+  <DragDropContext onDragEnd={onDragEnd}>
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
-      <DragDropContext onDragEnd={onDragEnd}>
-      <div className='AppContent'>
-      {data.map(column => 
-        <TrelloColumn 
-          title={column.title} 
-          cards={column.cards} 
-          key={column.id} 
-          id={column.id} 
-          addCard={addCard} 
-          deleteColumn={deleteColumn}
-          deleteCard={deleteCard}
-        />)}
-      <TrelloForm 
-        type='column' 
-        addColumn={addColumn} />
-      </div>
-      </ DragDropContext>
+        <Droppable droppableId='all-column' direction='horizontal' type='column'>
+          {provided => (
+            <div 
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className='AppContent'>
+              {data.map( (column,index) => 
+                <TrelloColumn
+                  type='column' 
+                  title={column.title} 
+                  cards={column.cards} 
+                  key={column.id} 
+                  id={column.id}
+                  index={index}
+                  addCard={addCard} 
+                  deleteColumn={deleteColumn}
+                  deleteCard={deleteCard}
+                />)}
+              {provided.placeholder}
+              <TrelloForm 
+                type='column' 
+                addColumn={addColumn} />
+          </div>)}
+        </Droppable>
     </div>
+  </ DragDropContext>
   )
 }
 
