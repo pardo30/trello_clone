@@ -43,7 +43,7 @@ const TrelloForm = (props) => {
     const addForm = () => {
         return (
             <div className='form'>
-                <input 
+                <textarea 
                     className='formInput'
                     type='text'
                     autoFocus
@@ -52,19 +52,18 @@ const TrelloForm = (props) => {
                     onChange={handleChangeInput}
                     value={textForm}
                     />
-                <div
-                    type='button'
+                <button
                     onMouseDown={(props.type === 'column') ? handleAddColumn : handleAddCard }
                     className='addButton'
                     >
                         +
-                    </div>
-                <div 
+                    </button>
+                <button 
                     className='closeButton'
                     onClick={closeForm}
                     >
                         X
-                    </div>
+                    </button>
             </div>
         )
     }

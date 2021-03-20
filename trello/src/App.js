@@ -68,7 +68,8 @@ const App = () => {
 
       case 'DRAG_HAPPEND':
         const { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type} = action.payload;
-        
+        const newDataDrag = [...data];
+
         //Dragging columns around
         if (type === 'column') {
           const newDataDrag = [...data];
@@ -80,14 +81,10 @@ const App = () => {
         //In the same column
         if(droppableIdStart === droppableIdEnd) {
           const column = data.find(column => String(column.id) === String(droppableIdStart));
-          console.log(column)
-          const draggingCards = column.cards;
-          console.log(draggingCards);
-          const card = draggingCards.splice(droppableIndexStart,1);
-          console.log(card)
-          const newDataDrag = draggingCards.splice(droppableIndexEnd, 0, card);
-          console.log(newDataDrag)
-          return newDataDrag; 
+          const card = column.cards.splice(droppableIndexStart,1);
+          console.log(card);
+          column.cards.splice(droppableIndexEnd, 0, card);
+
         }
 
         //Other column
@@ -96,10 +93,9 @@ const App = () => {
           console.log(draggableId);
           const card = columnStart.cards.splice(droppableIndexStart,1);
           const columnEnd = data.find(column => String(column.id) === String(droppableIdEnd));
-          const newDataDrag = columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
-          return newDataDrag;
+          columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
         }
-        break
+        return newDataDrag;
 
       default:
         return data;
@@ -155,20 +151,6 @@ const App = () => {
          type
        )
     }
-    // const sourceColumn = data.find(column => column.id === source.droppableId);
-    // const destinationColumn = data.find(column => column.id === destination.droppableId);
-    // const draggingCard = sourceColumn.cards.filter(card => card.id === draggableId);
-    // const newDataDrag = {
-    //   ...data,
-    //   cards:
-    // }
-
-    // //In the same column
-    // if (source.droppableId === destination.droppableId) {
-    //   sourceColumn.cards.splice(source.index, 1)
-    //   destinationColumn.cards.splice(destination.index, 0,  draggingCard)
-    // }
-
   }
 
   return (
@@ -193,10 +175,10 @@ const App = () => {
                   deleteColumn={deleteColumn}
                   deleteCard={deleteCard}
                 />)}
-              {provided.placeholder}
               <TrelloForm 
                 type='column' 
                 addColumn={addColumn} />
+          {provided.placeholder}
           </div>)}
         </Droppable>
     </div>
