@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from 'react';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import './App.css';
@@ -153,15 +154,10 @@ const App = () => {
   }
 
   return (
-  <DragDropContext onDragEnd={onDragEnd}>
+  <DndProvider backend={HTML5Backend}>
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
-        <Droppable droppableId='all-column' direction='horizontal' type='column'>
-          {provided => (
-            <div 
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className='AppContent'>
+            <div className='AppContent'>
               {data.map( (column,index) => 
                 <TrelloColumn
                   type='column' 
@@ -177,11 +173,9 @@ const App = () => {
               <TrelloForm 
                 type='column' 
                 addColumn={addColumn} />
-          {provided.placeholder}
-          </div>)}
-        </Droppable>
+            </div>
     </div>
-  </ DragDropContext>
+  </ DndProvider>
   )
 }
 

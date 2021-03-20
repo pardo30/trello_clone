@@ -4,7 +4,14 @@
     justify-content: space-between;
 
     width: 272px;
+    margin-bottom: 5px;
+    
 }
+
+/* .card:hover {
+    border: solid 2px rgba(255, 225, 255, 0.5);
+    border-radius: 5px;
+} */
 
 .cardText {
     width: 240px;

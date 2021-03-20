@@ -1,8 +1,9 @@
-import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
+import React, { useState, useRef } from 'react';
 import './TrelloCard.css';
 
 const TrelloCard = (props) => {
+
+    const [dragging, setDragging] = useState(false)
 
     const handleDeleteCard = () =>{
         const cardId = props.id
@@ -10,20 +11,20 @@ const TrelloCard = (props) => {
         props.deleteCard(cardId,columnId)
     }
 
+    const handleDragStart = e => {
+        console.log('drag ' + props.id + ' ' + props.columnId)
+        setDragging(true)
+    }
+
     return (
-        <Draggable draggableId={String(props.id)} index={props.index}>
-        {provided => (
             <div 
-                ref={provided.innerRef} 
-                    {...provided.dragHandleProps} 
-                    {...provided.draggableProps}>
+                draggable
+                onDragStart={handleDragStart}>
                 <div className='card' id={props.id}>
                     <div className='cardText'>{props.text}</div>
                     <button className='cardButton' onClick={handleDeleteCard}>X</button>
                 </div>
             </div>
-        )}
-        </Draggable>
     )
 }
 
