@@ -54,7 +54,7 @@ const App = () => {
         return newData;
 
       case 'DELETE_COLUMN':
-        const newDeleteDataColumn = data.filter (column => column.id !== action.payload.columnId)
+        const newDeleteDataColumn = data.filter (column => column.id !== action.payload)
         return newDeleteDataColumn;
       
       case 'DELETE_CARD':

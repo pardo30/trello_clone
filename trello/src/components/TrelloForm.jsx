@@ -31,7 +31,8 @@ const TrelloForm = (props) => {
         props.addColumn (title)
         }
 
-    const handleAddCard =  () => {
+    const handleAddCard =  (e) => {
+        e.stopPropagation()   
         const columnId = props.id
         const text = textForm
         props.addCard (text,columnId)

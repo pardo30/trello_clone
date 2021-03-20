@@ -8,8 +8,7 @@ const TrelloColunm = (props) => {
     
     
     const handleDeleteColumn = () => {
-        const columnId = props.id
-        props.deleteColumn(columnId)
+        props.deleteColumn(props.id)
     }
 
     return (
