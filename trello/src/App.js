@@ -82,7 +82,6 @@ const App = () => {
         if(droppableIdStart === droppableIdEnd) {
           const column = data.find(column => String(column.id) === String(droppableIdStart));
           const card = column.cards.splice(droppableIndexStart,1);
-          console.log(card);
           column.cards.splice(droppableIndexEnd, 0, card);
 
         }
@@ -168,7 +167,7 @@ const App = () => {
                   type='column' 
                   title={column.title} 
                   cards={column.cards} 
-                  key={column.id} 
+                  key={index} 
                   id={column.id}
                   index={index}
                   addCard={addCard} 
