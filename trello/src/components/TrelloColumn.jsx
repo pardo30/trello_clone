@@ -12,7 +12,7 @@ const TrelloColunm = (props) => {
     }
 
     return (
-        <Draggable draggableId={String(props.id)} index={props.index}>
+        <Draggable draggableId={String(props.id)} index={0}>
          {provided => (
             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Droppable droppableId={String(props.id)}>
@@ -37,11 +37,11 @@ const TrelloColunm = (props) => {
                             index={index}
                             columnId={props.id}
                             deleteCard={props.deleteCard}/>)}
+                        {provided.placeholder}
                         <TrelloForm 
                             type='task' 
                             id={props.id} 
                             addCard={props.addCard}/>
-                      {provided.placeholder}
                     </div>)}
             </ Droppable>
             </div>
