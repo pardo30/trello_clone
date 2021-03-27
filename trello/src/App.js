@@ -129,16 +129,23 @@ const App = () => {
       payload: {cardId, columnId}
     }) 
   
-  const dragHappend = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type) => 
-    dispatch({
-      type: 'DRAG_HAPPEND',
-      payload: { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type }
-    })  
+  // const dragHappend = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type) => 
+  //   dispatch({
+  //     type: 'DRAG_HAPPEND',
+  //     payload: { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type }
+  //   })  
     
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
 
     if (!destination) {
+      return;
+    }
+
+    if(
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
       return;
     }
 
@@ -151,9 +158,14 @@ const App = () => {
 
     //In the same column
     if(source.droppableId === destination.droppableId) {
-      const column = data.find(column => String(column.id) === String(source.droppableId));
+      const newDataDrag = [...data];
+      const column = newDataDrag.find(column => String(column.id) === String(source.droppableId));
+      console.log(draggableId);
       const card = column.cards.splice(source.index,1);
-      column.cards.splice(destination.index, 0, card);
+      console.log(Array.from(card))
+      column.cards.splice(destination.index, 0, card[0]);
+      console.log(newDataDrag);
+      return newDataDrag;
     }
 
     //Other column
@@ -190,11 +202,11 @@ const App = () => {
               {data.map( (column,index) => 
                 <TrelloColumn
                   type='column' 
+                  index={index}
+                  key={index} 
                   title={column.title} 
                   cards={column.cards} 
-                  key={index} 
                   id={column.id}
-                  index={index}
                   addCard={addCard} 
                   deleteColumn={deleteColumn}
                   deleteCard={deleteCard}

@@ -12,7 +12,7 @@ const TrelloColunm = (props) => {
     }
 
     return (
-        <Draggable draggableId={String(props.id)} index={0}>
+        <Draggable draggableId={String(props.id)} index={props.index}>
          {provided => (
             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Droppable droppableId={String(props.id)}>
