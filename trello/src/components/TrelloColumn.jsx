@@ -23,10 +23,10 @@ const TrelloColunm = (props) => {
                     <div 
                         ref={provided.innerRef} 
                         {...provided.droppableProps}
-                        className='list' 
+                        className='column' 
                         id={props.id}>
-                            <div className='listHeader'>
-                                    <h3 className='listTitle'>{props.title}</h3>
+                            <div className='columnHeader'>
+                                    <h3 className='columnTitle'>{props.title}</h3>
                                     <button 
                                         className='deleteButton'
                                         onMouseDown={handleDeleteColumn}

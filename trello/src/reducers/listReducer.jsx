@@ -32,6 +32,7 @@ const listReducer  = (state = initialState, action) => {
             cards: []
           };
           return [...state, newColumn];
+      
           
         case Actions.ADD_CARD:
           const newCard = {
@@ -44,6 +45,7 @@ const listReducer  = (state = initialState, action) => {
             : column
             )
           return newState;
+
               
         case Actions.DELETE_COLUMN:
           const newDeleteStateColumn = state.filter (column => column.id !== action.payload)
@@ -79,6 +81,7 @@ const listReducer  = (state = initialState, action) => {
             //In the same column
             if(droppableIdStart === droppableIdEnd) {
               const column = state.find(column => String(column.id) === String(droppableIdStart));
+              console.log(draggableId);
               const card = column.cards.splice(droppableIndexStart,1);
               column.cards.splice(droppableIndexEnd, 0, ...card);
             }
@@ -87,10 +90,12 @@ const listReducer  = (state = initialState, action) => {
             if(droppableIdStart !== droppableIdEnd) {
               const columnStart = state.find(column => String(column.id) === String(droppableIdStart));
               const card = columnStart.cards.splice(droppableIndexStart,1);
+              console.log(draggableId);
               const columnEnd = state.find(column => String(column.id) === String(droppableIdEnd));
               columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
             }
-                    
+          break;
+
         default:
           return state;
         }

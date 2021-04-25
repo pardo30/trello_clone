@@ -4,6 +4,7 @@ import TrelloForm from './components/TrelloForm';
 import { sort } from './actions';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import './App.css';
 
 
 export class App extends Component {
@@ -30,6 +31,7 @@ export class App extends Component {
     render() {
         const { lists } = this.props;
         return (
+            <div className='backgroundApp'>
             <DragDropContext onDragEnd={this.onDragEnd}>
             <div className='App'>
             <h1 className='AppTitle'>Trello Clone</h1>
@@ -59,6 +61,7 @@ export class App extends Component {
             </div>
             </div>
         </ DragDropContext>
+        </div>
         )
     }
 }
