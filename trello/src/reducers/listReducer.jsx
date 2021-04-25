@@ -62,3 +62,5 @@ const listReducer  = (state = initialState, action) => {
           return data;
         }
       }
+
+export default listReducer;
