@@ -6,5 +6,6 @@ export const Actions = {
     ADD_CARD: 'ADD_CARD',
     DELETE_COLUMN: 'DELETE_COLUMN',
     DELETE_CARD: 'DELETE_CARD',
-    DRAG_HAPPEND: 'DRAG_HAPPEND'
+    DRAG_HAPPEND: 'DRAG_HAPPEND',
+    
 };

@@ -67,10 +67,10 @@ const listReducer  = (state = initialState, action) => {
                 draggableId,
                 type
             } = action.payload;
-            const newState = [...state];
         
             //Dragging columns around
-            if (type === 'column') { 
+            if (type === 'column') {
+              const newState = [...state];
               const column = newState.splice(droppableIndexStart,1);
               newState.splice(droppableIndexEnd, 0, ...column);
               return newState;
@@ -90,9 +90,6 @@ const listReducer  = (state = initialState, action) => {
               const columnEnd = state.find(column => String(column.id) === String(droppableIdEnd));
               columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
             }
-            return newState;
-
-          }
                     
         default:
           return state;

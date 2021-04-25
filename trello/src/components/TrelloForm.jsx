@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addColumn, addCard, deleteColumn, deleteCard } from '../actions';
+import { addColumn, addCard } from '../actions';
 import './TrelloForm.css';
 
 export class TrelloForm extends Component {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TrelloColumn from './components/TrelloColumn';
 import TrelloForm from './components/TrelloForm';
 import { sort } from './actions';
-import { connect, Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 
