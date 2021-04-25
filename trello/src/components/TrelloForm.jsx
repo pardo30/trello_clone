@@ -4,11 +4,13 @@ import { addColumn, addCard } from '../actions';
 import './TrelloForm.css';
 
 export class TrelloForm extends Component {
-
-    state = {
-        formOpen: false,
-        text: ''
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            formOpen: false,
+            text: ''
+        }
+    };
 
     openForm = () => { 
         this.setState ({
@@ -43,20 +45,20 @@ export class TrelloForm extends Component {
     };
 
     handleAddCard = () => {
-        const { dispatch, columnId } = this.props;
+        const { dispatch } = this.props;
         const { text } = this.state;
 
         if(text) {
             this.setState({
                 text: ''
                 })
-            dispatch(addCard(text, columnId));
-        }        
+            dispatch(addCard(text, this.props.id));
+        }   
+        return;     
     }
 
     buttonForm = () => {
-        const { column } = this.props;
-        const buttonText = column ? 'New List' : 'New Task' 
+        const buttonText = (this.props.type === 'column') ? 'New List' : 'New Task';
 
         return (
             <button onClick={this.openForm} className="formbutton" >
@@ -66,8 +68,7 @@ export class TrelloForm extends Component {
     }
 
     addForm = () => {
-        const { column } = this.props;
-        const placeholder = column ? 'Add a new List' : 'Add a new Task'
+        const placeholder = (this.props.type === 'column') ? 'Add a new List' : 'Add a new Task';
 
         return (
             <div className='form'>
@@ -81,7 +82,7 @@ export class TrelloForm extends Component {
                     value={this.state.text}
                     />
                 <button
-                    onMouseDown={column ? this.handleAddColumn : this.handleAddCard }
+                    onMouseDown={(this.props.type === 'column') ? this.handleAddColumn : this.handleAddCard }
                     className='addButton'
                     >
                         +

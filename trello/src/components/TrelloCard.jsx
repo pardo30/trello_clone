@@ -8,9 +8,6 @@ import './TrelloCard.css';
 export class TrelloCard extends Component {
     constructor(props) {
         super(props);
-        this.state={
-
-        }
     };
     
     handleDeleteCard = () =>{

@@ -1,56 +1,62 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import TrelloCard from './TrelloCard'
 import TrelloForm from './TrelloForm';
+import { deleteColumn } from '../actions';
 import './TrelloColumn.css';
 
-const TrelloColunm = (props) => {
-    
-    
-    const handleDeleteColumn = () => {
-        props.deleteColumn(props.id)
-    }
 
-    return (
-        <Draggable draggableId={String(props.id)} index={props.index}>
+export class TrelloColumn extends Component {
+    
+    handleDeleteColumn = () =>{
+        const { dispatch } = this.props
+        const columnId = this.props.id
+        dispatch(deleteColumn(columnId));
+     }
+
+    render() {
+        return (
+        <Draggable draggableId={String(this.props.id)} index={this.props.index}>
          {provided => (
             <div 
                 ref={provided.innerRef} 
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}>
-            <Droppable droppableId={String(props.id)}>
+            <Droppable droppableId={String(this.props.id)}>
                 {provided => (     
                     <div 
                         ref={provided.innerRef} 
                         {...provided.droppableProps}
                         className='column' 
-                        id={props.id}>
+                        id={this.props.id}>
                             <div className='columnHeader'>
-                                    <h3 className='columnTitle'>{props.title}</h3>
+                                    <h3 className='columnTitle'>{this.props.title}</h3>
                                     <button 
                                         className='deleteButton'
-                                        onMouseDown={handleDeleteColumn}
+                                        onMouseDown={this.handleDeleteColumn}
                                     > X </button> 
                             </div>
-                        {props.cards.map((card, index) => 
+                        {this.props.cards.map((card, index) => 
                         <TrelloCard 
                             text={card.text} 
                             key={card.id} 
                             id={card.id}
                             index={index}
-                            columnId={props.id}
-                            deleteCard={props.deleteCard}/>)}
+                            columnId={this.props.id}
+                            deleteCard={this.props.deleteCard}/>)}
                         <TrelloForm 
                             type='task' 
-                            id={props.id} 
-                            addCard={props.addCard}/>
+                            id={this.props.id} 
+                            addCard={this.props.addCard}/>
                         {provided.placeholder}
                     </div>)}
             </ Droppable>
             </div>
          )}
         </Draggable>
-    )
+        )
+    }
 }
 
-export default TrelloColunm
+export default connect () (TrelloColumn);
