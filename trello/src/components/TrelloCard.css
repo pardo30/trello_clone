@@ -5,6 +5,10 @@
 
     width: 272px;
 }
+.card:hover{
+    border: 2px solid white;
+    border-radius: 2px;
+}
 
 .cardText {
     width: 240px;

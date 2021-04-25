@@ -8,37 +8,38 @@ import './App.css';
 const App = () => {
   const initialState = [
     {title: "List 1",
-      id: 0,
+      id: `column-${0}`,
       cards: [
-        {id: 0,
+        {id: `card-${0}`,
           text: "card0"},
-        {id: 1,
+        {id: `card-${1}`,
           text: "card1"},
       ]},
       {title: "List 2",
-      id: 1,
+      id: `column-${1}`,
       cards: [
-        {id: 2,
+        {id: `card-${2}`,
           text: "card2"},
-        {id: 3,
+        {id: `card-${3}`,
           "text": "card3"}
       ]},
     ]
   const reducer = (data, action) => {
     switch (action.type) {
       case 'ADD_COLUMN':
+        setRefId(refId+1)
         const newColumn = {
           title: action.payload,
-          id: refId,
+          id: `column-${refId}`,
           cards: [],
         };
-        setRefId(refId+1)
+        console.log(refId)
         return [...data, newColumn];
         
         case 'ADD_CARD':
           setRefCardId(refCardId+1)
           const newCard = {
-            id: refCardId,
+            id: `card-${refCardId}`,
             text: action.payload.text
           };
           const newData = data.map (column =>
@@ -99,12 +100,6 @@ const App = () => {
   payload: {cardId, columnId}
   }) 
 
-  // const dragHappend = (droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type) => 
-  //   dispatch({
-  //     type: 'DRAG_HAPPEND',
-  //     payload: { droppableIdStart, droppableIdEnd, droppableIndexStart, droppableIndexEnd, draggableId, type }
-  //   })  
-
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
     
@@ -112,17 +107,19 @@ const App = () => {
       return;
     }
     
-    if(
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-      ) {
-        return;
-      }
+    // if(
+    //   destination.droppableId === source.droppableId &&
+    //   destination.index === source.index
+    //   ) {
+    //     return;
+    //   }
     
     if (type === 'column') { //Dragging columns around
-      const newDataDrag = [...data];
+      const newDataDrag = data;
       const column = newDataDrag.splice(source.index,1);
-      newDataDrag.splice(destination.index, 0, ...column);
+      console.log(source.index)
+      newDataDrag.splice(destination.index, 0, column[0]);
+      console.log(destination.index);
       return newDataDrag;
     }
 
@@ -140,11 +137,13 @@ const App = () => {
 
     //Other column
     if(source.droppableId !== destination.droppableId) {
-      const columnStart = data.find(column => String(column.id) === String(source.droppableId));
+      const newDataDrag = [...data];
+      const columnStart = newDataDrag.find(column => String(column.id) === String(source.droppableId));
       console.log(draggableId);
       const card = columnStart.cards.splice(source.index,1);
-      const columnEnd = data.find(column => String(column.id) === String(destination.droppableId));
+      const columnEnd = newDataDrag.find(column => String(column.id) === String(destination.droppableId));
       columnEnd.cards.splice(destination.index, 0, ...card);
+      return newDataDrag;
     }
     
     // else {
@@ -163,17 +162,19 @@ const App = () => {
   <DragDropContext onDragEnd={onDragEnd}>
     <div className='App'>
       <h1 className='AppTitle'>Trello Clone</h1>
-        <Droppable droppableId='all-column' direction='horizontal' type='column'>
+        <div className='AppContent'>
+          <Droppable droppableId='all-column' direction='horizontal' type='column'>
           {provided => (
             <div 
               ref={provided.innerRef}
               {...provided.droppableProps}
-              className='AppContent'>
+              className='AppContent'
+              >
               {data.map( (column,index) => 
                 <TrelloColumn
                   type='column' 
                   index={index}
-                  key={index} 
+                  key={column.id} 
                   title={column.title} 
                   cards={column.cards} 
                   id={column.id}
@@ -181,12 +182,13 @@ const App = () => {
                   deleteColumn={deleteColumn}
                   deleteCard={deleteCard}
                 />)}
-              <TrelloForm 
-                type='column' 
-                addColumn={addColumn} />
           {provided.placeholder}
           </div>)}
         </Droppable>
+        <TrelloForm 
+          type='column' 
+          addColumn={addColumn} />
+      </div>
     </div>
   </ DragDropContext>
   )
