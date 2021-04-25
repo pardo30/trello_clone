@@ -69,30 +69,33 @@ const listReducer  = (state = initialState, action) => {
                 draggableId,
                 type
             } = action.payload;
+            const newDragState = [...state];
         
             //Dragging columns around
             if (type === 'column') {
-              const newState = [...state];
+              //const newState = [...state];
               const column = newState.splice(droppableIndexStart,1);
               newState.splice(droppableIndexEnd, 0, ...column);
-              return newState;
+              return newDragState;
             }
         
             //In the same column
             if(droppableIdStart === droppableIdEnd) {
-              const column = state.find(column => String(column.id) === String(droppableIdStart));
+              const column = newDragState.find(column => String(column.id) === String(droppableIdStart));
               console.log(draggableId);
               const card = column.cards.splice(droppableIndexStart,1);
               column.cards.splice(droppableIndexEnd, 0, ...card);
+              return newDragState;
             }
         
             //Other column
             if(droppableIdStart !== droppableIdEnd) {
-              const columnStart = state.find(column => String(column.id) === String(droppableIdStart));
+              const columnStart = newDragState.find(column => String(column.id) === String(droppableIdStart));
               const card = columnStart.cards.splice(droppableIndexStart,1);
               console.log(draggableId);
               const columnEnd = state.find(column => String(column.id) === String(droppableIdEnd));
               columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
+              return newDragState;
             }
           break;
 

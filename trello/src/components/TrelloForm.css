@@ -6,7 +6,7 @@
     color: white;
     border: none;
     border-radius: 3px;
-    background-color: teal;
+    background-color: #555;
 
 }
 .form{
@@ -26,14 +26,16 @@
     border: 0;
     border-radius: 3px;
     color: white;
-    background-color: rgb(168, 187, 187)
+    background-color: #444;
 }
-
+.formInput::placeholder{
+    color: white;
+}
 .addButton {
     width: 28px;
     height: 40px;
 
-    color: rgb(50, 50, 50);
+    color: white;
     font-size: 20px;
     background-color: rgba(255, 225, 255, 0);
     border: none;
@@ -43,12 +45,12 @@
     width: 28px;
     height: 40px;
 
-    color: rgb(50, 50, 50);
+    color: white;
     background-color: rgba(255, 225, 255, 0);
     border: none;
 }
 
 .addButton:hover, .closeButton:hover {
-    background-color: rgba(47, 79, 79, 0.178);
+    background-color: #444;
     border-radius: 3px;
 }
