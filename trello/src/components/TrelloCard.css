@@ -2,22 +2,32 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 15px;
 
     width: 272px;
+    color: #333;
+
+    border-radius: 6px;
+    background-color: white;
 }
 .card:hover{
-    border: 2px solid white;
-    border-radius: 2px;
+
+    border-bottom: 5px solid #500;
+    transition: all 0.5s;
 }
 
 .cardText {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
     width: 240px;
+    padding-left: 3px;
 
     word-break: break-all;
     hyphens: auto;
 
     font-size: 14px;
-    color: white;
 
 
 }
@@ -26,7 +36,7 @@
     width: 28px;
     height: 28px;
 
-    color: rgb(50, 50, 50);
+    color: #333;
     background-color: rgba(255, 225, 255, 0);
     border: none;
 
