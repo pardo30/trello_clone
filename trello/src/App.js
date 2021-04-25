@@ -34,7 +34,7 @@ export class App extends Component {
             <div className='backgroundApp'>
             <DragDropContext onDragEnd={this.onDragEnd}>
             <div className='App'>
-            <h1 className='AppTitle'>Trello Clone</h1>
+            <h1 className='AppTitle'>KANBAN APP</h1>
                 <div className='AppContent'>
                 <Droppable droppableId='all-column' direction='horizontal' type='column'>
                 {provided => (
