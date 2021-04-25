@@ -12,7 +12,8 @@
 }
 .card:hover{
 
-    border-bottom: 5px solid #500;
+    border-bottom: 5px solid #333;
+    border-right: 5px solid #333;
     transition: all 0.5s;
 }
 

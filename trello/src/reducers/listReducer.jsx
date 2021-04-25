@@ -5,21 +5,21 @@ let columnId = 2;
 let cardId = 4;
 
 const initialState = [
-    {title: "List 1",
+    {title: "TO DO",
       id: `column-${0}`,
       cards: [
         {id: `card-${0}`,
-          text: "card0"},
+          text: "Blog and social post"},
         {id: `card-${1}`,
-          text: "card1"},
+          text: "New landing page"},
       ]},
-      {title: "List 2",
+      {title: "DOING",
       id: `column-${1}`,
       cards: [
         {id: `card-${2}`,
-          text: "card2"},
+          text: "Homepage design update"},
         {id: `card-${3}`,
-          "text": "card3"}
+          "text": "New user templates"}
       ]},
     ];
 
@@ -31,6 +31,7 @@ const listReducer  = (state = initialState, action) => {
             id: `column-${columnId}`,
             cards: []
           };
+          columnId +=1
           return [...state, newColumn];
       
           
@@ -39,6 +40,7 @@ const listReducer  = (state = initialState, action) => {
             id: `card-${cardId}`,
             text: action.payload.text
           };
+          cardId +=1
           const newState = state.map (column =>
             column.id === action.payload.columnId
             ? {...column, cards: [...column.cards, newCard]}
@@ -74,8 +76,8 @@ const listReducer  = (state = initialState, action) => {
             //Dragging columns around
             if (type === 'column') {
               //const newState = [...state];
-              const column = newState.splice(droppableIndexStart,1);
-              newState.splice(droppableIndexEnd, 0, ...column);
+              const column = newDragState.splice(droppableIndexStart,1);
+              newDragState.splice(droppableIndexEnd, 0, ...column);
               return newDragState;
             }
         

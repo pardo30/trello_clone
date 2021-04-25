@@ -10,6 +10,10 @@
 }
 .AppTitle{
   text-align: center;
+  margin: 10px 0 10px;
+  padding: 5px 0 5px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .AppContent {
