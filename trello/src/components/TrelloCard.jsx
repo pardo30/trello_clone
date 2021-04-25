@@ -1,30 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
+import { deleteCard } from '../actions';
 import './TrelloCard.css';
 
-const TrelloCard = (props) => {
 
-    const handleDeleteCard = () =>{
-        const cardId = props.id
-        const columnId = props.columnId
-        props.deleteCard(cardId,columnId)
-    }
+export class TrelloCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
 
-    return (
-        <Draggable draggableId={String(props.id)} index={props.index}>
-        {provided => (
-            <div 
-                ref={provided.innerRef} 
-                    {...provided.dragHandleProps} 
-                    {...provided.draggableProps}>
-                <div className='card' id={props.id}>
-                    <div className='cardText'>{props.text}</div>
-                    <button className='cardButton' onClick={handleDeleteCard}>X</button>
+        }
+    };
+    
+    handleDeleteCard = () =>{
+        const { dispatch } = this.props
+        const cardId = this.props.id
+        const columnId = this.props.columnId
+        dispatch(deleteCard(cardId,columnId));
+     }
+
+
+    render() {
+        return (
+            <Draggable draggableId={String(this.props.id)} index={this.props.index}>
+            {provided => (
+                <div 
+                    ref={provided.innerRef} 
+                        {...provided.dragHandleProps} 
+                        {...provided.draggableProps}>
+                    <div className='card' id={this.props.id}>
+                        <div className='cardText'>{this.props.text}</div>
+                        <button className='cardButton' onClick={this.handleDeleteCard}>X</button>
+                    </div>
                 </div>
-            </div>
-        )}
-        </Draggable>
-    )
+            )}
+            </Draggable>
+        )
+    }
 }
 
-export default TrelloCard
+export default connect () (TrelloCard);
