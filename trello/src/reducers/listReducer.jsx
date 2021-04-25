@@ -25,7 +25,7 @@ const initialState = [
 
 const listReducer  = (state = initialState, action) => {
     switch (action.type) {
-        case Action.ADD_COLUMN:
+        case Actions.ADD_COLUMN:
           const newColumn = {
             title: action.payload,
             id: `column-${columnId}`,
@@ -33,7 +33,7 @@ const listReducer  = (state = initialState, action) => {
           };
           return [...state, newColumn];
           
-        case 'ADD_CARD':
+        case Actions.ADD_CARD:
           const newCard = {
             id: `card-${cardId}`,
             text: action.payload.text
@@ -45,11 +45,11 @@ const listReducer  = (state = initialState, action) => {
             )
           return newState;
               
-        case 'DELETE_COLUMN':
+        case Actions.DELETE_COLUMN:
           const newDeleteStateColumn = state.filter (column => column.id !== action.payload)
           return newDeleteStateColumn;
                 
-        case 'DELETE_CARD':
+        case Actions.DELETE_CARD:
           const newDeleteStateCard = state.map (column =>
             column.id === action.payload.columnId
             ? {...column, cards: column.cards.filter (card => card.id !== action.payload.cardId)}
@@ -57,9 +57,45 @@ const listReducer  = (state = initialState, action) => {
             )
             console.log('delete')
           return newDeleteStateCard;
+        
+        case Actions.DRAG_HAPPEND:
+            const{
+                droppableIdStart,
+                droppableIdEnd,
+                droppableIndexStart,
+                droppableIndexEnd,
+                draggableId,
+                type
+            } = action.payload;
+            const newState = [...state];
+        
+            //Dragging columns around
+            if (type === 'column') { 
+              const column = newState.splice(droppableIndexStart,1);
+              newState.splice(droppableIndexEnd, 0, ...column);
+              return newState;
+            }
+        
+            //In the same column
+            if(droppableIdStart === droppableIdEnd) {
+              const column = state.find(column => String(column.id) === String(droppableIdStart));
+              const card = column.cards.splice(droppableIndexStart,1);
+              column.cards.splice(droppableIndexEnd, 0, ...card);
+            }
+        
+            //Other column
+            if(droppableIdStart !== droppableIdEnd) {
+              const columnStart = state.find(column => String(column.id) === String(droppableIdStart));
+              const card = columnStart.cards.splice(droppableIndexStart,1);
+              const columnEnd = state.find(column => String(column.id) === String(droppableIdEnd));
+              columnEnd.cards.splice(droppableIndexEnd, 0, ...card);
+            }
+            return newState;
+
+          }
                     
         default:
-          return data;
+          return state;
         }
       }
 

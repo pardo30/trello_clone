@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addColumn, addCard, deleteColumn, deleteCard } from '../actions';
 import './TrelloForm.css';
 
 

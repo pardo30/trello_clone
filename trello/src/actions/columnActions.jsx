@@ -14,3 +14,23 @@ export const deleteColumn = (columnId) => {
     };
 }
 
+export const sort = (
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    draggableId,
+    type
+) => {
+    return {
+        type: Actions.DRAG_HAPPEND,
+        payload: {
+            droppableIdStart,
+            droppableIdEnd,
+            droppableIndexStart,
+            droppableIndexEnd,
+            draggableId,
+            type
+        }
+    }
+}
