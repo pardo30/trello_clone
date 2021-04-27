@@ -11,16 +11,34 @@
 
 ## General Info
 ***
+React application with class method and Redux to use the Kanban workflow system. It allows creating and deleting boards and cards, as well as moving them by drag and drop. Based on the Trello model.
+
+Redux allows to manage the app’s state and kept it in a store, and each component can access any state that it needs from this store. Actions are sent using the `store.dispatch()` method and Reducers take the current state of an application, perform an action, and return a new state.
+
+### Features
+- Add card
+- Add Board
+- Delete card
+- Delete card
+- Drag and drop card onto same board
+- Drag and drop card to another board
+- Drag and drop board
+
 
 ## Screenshots
 ***
-![ScreenShot Kanban Create Card](./src/img/Create-Card.gif)
+![ScreenShot Kanban Create Card](./src/img/Create.gif)
 ![ScreenShot Kanban Drag & Drop](./src/img/D&D.gif)
 
 
 ## Technologies
 ***
-
+A list of technologies used within the project:
+* [React](https://reactjs.org/): Version 17.0.2 
+* [React-router-dom](https://www.npmjs.com/package/react-router-dom): Version 5.2.0
+* [Redux](https://redux.js.org/): Version 4.0.5
+* [React-redux](https://react-redux.js.org/): Version 7.2.2
+* [React-beautiful-dnd](https://www.npmjs.com/package/react-beautiful-dnd): Version 13.1.0
 
 ## Installation
 ***
