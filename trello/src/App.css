@@ -1,22 +1,30 @@
-.backgroundApp{
-  background-image: url('./img/background.png');
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -5;
-  overflow: hidden;
-}
-.AppTitle{
-  text-align: center;
+.AppTitle
+{
   margin: 10px 0 10px;
   padding: 5px 0 5px;
+  
+  text-align: center;
+  
   color: white;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, .2);
 }
 
-.AppContent {
+.AppContent
+{
   display: flex;
   flex-direction: row;
+}
+
+.backgroundApp
+{
+    position: fixed;
+    z-index: -5;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    background-image: url('./img/background.png');
 }

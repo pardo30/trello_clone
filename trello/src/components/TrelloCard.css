@@ -1,26 +1,30 @@
-.card {
+.card
+{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 15px;
 
     width: 272px;
-    color: #333;
+    margin-bottom: 15px;
 
+    color: #333;
     border-radius: 6px;
     background-color: white;
-}
-.card:hover{
 
-    border-bottom: 5px solid #333;
+    justify-content: space-between;
+}
+.card:hover
+{
+    transition: all .5s;
+
     border-right: 5px solid #333;
-    transition: all 0.5s;
+    border-bottom: 5px solid #333;
 }
 
-.cardText {
+.cardText
+{
+    font-size: 14px;
+
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
 
     width: 240px;
     padding-left: 3px;
@@ -28,17 +32,16 @@
     word-break: break-all;
     hyphens: auto;
 
-    font-size: 14px;
-
-
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.cardButton {
+.cardButton
+{
     width: 28px;
     height: 28px;
 
     color: #333;
-    background-color: rgba(255, 225, 255, 0);
     border: none;
-
+    background-color: rgba(255, 225, 255, 0);
 }
